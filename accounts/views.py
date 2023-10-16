@@ -3,6 +3,7 @@ from accounts.forms import LoginForm
 from django.contrib.auth import authenticate, login
 
 
+
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
