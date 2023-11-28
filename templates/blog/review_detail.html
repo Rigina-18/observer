@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+{{ review }}<br>
+review.id : {{ review.id }}<br>
+user.id : {{ user.id }}<br>
+user.id : {{ request.user.id }}<br>
+body : {{ review.body }}<br>
+<a href="{% url 'edit_review' review.id %}">edit</a> <br>
+like_count<span id="like-count">{{ like_count }}</span>
+<form action="{% url 'add_like' %}" method="POST">
+    {% csrf_token %}
+    <input name="review" value="{{ review.id }}">
+    <input name="user" value="{{ user.id }}">
+    <button type="submit" id="newlabel">{{ label }}</button>
+
+</form>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4kLviL8XwAI?si=wDNVkUO9zy6RTJK5"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            event.preventDefault();
+
+            var form = $(this);
+            var formData = form.serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: form.attr('action'),
+                data: formData,
+                success: function(response) {
+                            var newLikeCount = response.like_count;  // сервер возвращает новое количество лайков.
+                            $('#like-count').text(newLikeCount);  // Обновляет отображаемое количество лайков.
+                            var newlabel = response.label;  // сервер возвращает новое количество лайков.
+                            $('#newlabel').text(newlabel);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+            });
+        });
+    })
+        ;
+
+</script>
+</body>
+</html>
