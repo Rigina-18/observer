@@ -30,6 +30,7 @@ class ReviewSerializers(serializers.ModelSerializer):
             'date_schedule',
             'to_publish',
             'like_count',
+            'file',
 
         ]
 

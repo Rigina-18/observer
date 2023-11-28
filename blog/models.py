@@ -20,7 +20,7 @@ class Review(models.Model):
     date_schedule = models.DateField(null=True, blank=True)
     to_publish = models.BooleanField(default=False)
     total_like = models.IntegerField(null=True, blank=True)
-    
+    file = models.FileField(upload_to='files', blank=True)
 
     def __str__(self):
         return f'{self.id}|{self.topic}|{self.title}'

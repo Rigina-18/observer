@@ -11,6 +11,8 @@ review.id : {{ review.id }}<br>
 user.id : {{ user.id }}<br>
 user.id : {{ request.user.id }}<br>
 body : {{ review.body }}<br>
+file :{{ review.file }}<br>
+<a href="{{ review.file.url}}">{{ review.file }}</a><br>
 <a href="{% url 'edit_review' review.id %}">edit</a> <br>
 like_count<span id="like-count">{{ like_count }}</span>
 <form action="{% url 'add_like' %}" method="POST">
