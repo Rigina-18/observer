@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="" method="POST">{% csrf_token %}{{ form.as_p }}
+<form action="" method="POST">{% csrf_token %}{{ form.as_p|safe }}
     <button type="submit">save</button>
 </form>
 
